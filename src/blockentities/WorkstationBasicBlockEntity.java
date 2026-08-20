@@ -1,14 +1,14 @@
-package com.lance5057.compendium.blockentities;
+package api.LanceNestAPI.src.blockentities;
 
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.lance5057.compendium.workstations._bases.components.WorkstationComponent;
-
+import api.LanceNestAPI.src.components.WorkstationComponent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;

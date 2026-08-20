@@ -1,4 +1,4 @@
-package com.lance5057.compendium.recipes;
+package api.LanceNestAPI.src.recipes;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;

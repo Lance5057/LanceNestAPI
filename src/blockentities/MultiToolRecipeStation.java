@@ -1,18 +1,18 @@
-package com.lance5057.compendium.blockentities;
+package api.LanceNestAPI.src.blockentities;
 
 import java.util.HashSet;
 import java.util.Optional;
 
-import com.lance5057.compendium.workstations._bases.recipes.AnimatedRecipeItemUse;
-import com.lance5057.compendium.workstations._bases.recipes.multitoolrecipe.MultiToolRecipe;
-import com.lance5057.lancenestapi.blocks.RecipeToolSupplier.RecipeToolSupplierBlockEntity;
-import com.lance5057.lancenestapi.util.ItemUtil;
-import com.lance5057.lancenestapi.workstations._bases.components.item.BlockEntityItemHandler;
-
+import api.LanceNestAPI.src.blocks.RecipeToolSupplier.RecipeToolSupplierBlockEntity;
+import api.LanceNestAPI.src.components.item.BlockEntityItemHandler;
+import api.LanceNestAPI.src.recipes.AnimatedRecipeItemUse;
+import api.LanceNestAPI.src.recipes.multitoolrecipe.MultiToolRecipe;
+import api.LanceNestAPI.src.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -26,6 +26,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;

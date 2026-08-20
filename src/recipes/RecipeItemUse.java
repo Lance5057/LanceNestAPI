@@ -1,4 +1,4 @@
-package com.lance5057.compendium.recipes;
+package api.LanceNestAPI.src.recipes;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
