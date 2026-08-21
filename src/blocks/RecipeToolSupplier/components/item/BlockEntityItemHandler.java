@@ -8,7 +8,7 @@ public class BlockEntityItemHandler extends ItemStackHandler {
 
 	BlockEntity be;
 
-	public BlockEntity getBe() {
+	public BlockEntity getBlockEntity() {
 		return be;
 	}
 

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Optional;
 
 import api.LanceNestAPI.src.blocks.RecipeToolSupplier.RecipeToolSupplierBlockEntity;
-import api.LanceNestAPI.src.components.item.BlockEntityItemHandler;
+import api.LanceNestAPI.src.blocks.RecipeToolSupplier.components.item.BlockEntityItemHandler;
 import api.LanceNestAPI.src.recipes.AnimatedRecipeItemUse;
 import api.LanceNestAPI.src.recipes.multitoolrecipe.MultiToolRecipe;
 import api.LanceNestAPI.src.util.ItemUtil;

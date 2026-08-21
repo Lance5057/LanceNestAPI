@@ -3,7 +3,7 @@ package api.LanceNestAPI.src.blocks.RecipeToolSupplier;
 import javax.annotation.Nonnull;
 
 import api.LanceNestAPI.src.blockentities.MultiToolRecipeStation;
-import api.LanceNestAPI.src.components.item.BlockEntityItemHandler;
+import api.LanceNestAPI.src.blocks.RecipeToolSupplier.components.item.BlockEntityItemHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
