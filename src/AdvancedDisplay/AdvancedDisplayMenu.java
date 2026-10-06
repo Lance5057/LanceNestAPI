@@ -2,12 +2,12 @@ package api.LanceNestAPI.src.AdvancedDisplay;
 
 import java.util.Objects;
 
-import com.lance5057.extradelight.ExtraDelightContainers;
-import com.lance5057.extradelight.blocks.countercabinet.CounterCabinetBlockEntity;
 import com.lance5057.extradelight.gui.HideableSlot;
 
 import api.LanceNestAPI.src.LanceNestAPI;
+import api.LanceNestAPI.src.network.AdvancedDisplaySyncPacket;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -48,7 +48,7 @@ public class AdvancedDisplayMenu extends AbstractContainerMenu {
 			}
 
 //			this.addSlot(new HideableSlot(tileEntity.getItems(), 27, 80, 36, true).setActive(false));
-			
+
 			// Main Player Inventory
 			int startPlayerInvY = startY * 4 + 36;
 			for (int row = 0; row < 3; ++row) {
@@ -127,4 +127,11 @@ public class AdvancedDisplayMenu extends AbstractContainerMenu {
 		}, true);
 	}
 
+	@Override
+	public void sendAllDataToRemote() {
+		super.sendAllDataToRemote();
+		if (this.player instanceof ServerPlayer serverPlayer)
+			serverPlayer.connection
+					.send(new AdvancedDisplaySyncPacket(this.containerId, this.tileEntity.getBlockPos()));
+	}
 }

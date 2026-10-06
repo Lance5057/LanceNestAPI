@@ -89,6 +89,7 @@ public class Vector3Widget {
 	}
 
 	public void set(Vector3f f) {
+		this.vector = new Vector3f(f);
 		x.set(f.x);
 		y.set(f.y);
 		z.set(f.z);

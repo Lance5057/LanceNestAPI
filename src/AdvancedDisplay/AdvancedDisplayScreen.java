@@ -9,8 +9,11 @@ import api.LanceNestAPI.src.ui.Vector3Widget;
 import api.LanceNestAPI.src.util.rendering.animation.Transform;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class AdvancedDisplayScreen extends AbstractContainerScreen<AdvancedDisplayMenu> {
 
@@ -22,10 +25,10 @@ public class AdvancedDisplayScreen extends AbstractContainerScreen<AdvancedDispl
 	Vector3Widget scale;
 	Vector3Widget origin;
 
-	Vector3f vPos = new Vector3f();
-	Vector3f vRot = new Vector3f();
-	Vector3f vScale = new Vector3f();
-	Vector3f vOrigin = new Vector3f();
+//	Vector3f vPos = new Vector3f();
+//	Vector3f vRot = new Vector3f();
+//	Vector3f vScale = new Vector3f();
+//	Vector3f vOrigin = new Vector3f();
 
 	public AdvancedDisplayScreen(AdvancedDisplayMenu menu, Inventory playerInventory, Component title) {
 		super(menu, playerInventory, title);
@@ -36,17 +39,33 @@ public class AdvancedDisplayScreen extends AbstractContainerScreen<AdvancedDispl
 				i = 0;
 
 			Transform t = menu.tileEntity.getItemTransform(i);
-			pos.set(t.getTranslate());
+			pos.set(t.getPosition());
 			rot.set(t.getRotation());
 			scale.set(t.getScale());
 			origin.set(t.getOrigin());
 
 		}).setLimit(0, AdvancedDisplayBlockEntity.NUM_SLOTS - 1);
 
-		pos = new Vector3Widget(v -> menu.tileEntity.getItemTransform(i).setTranslate(v));
-		rot = new Vector3Widget(v -> menu.tileEntity.getItemTransform(i).setRotation(v));
-		scale = new Vector3Widget(new Vector3f(1, 1, 1), v -> menu.tileEntity.getItemTransform(i).setScale(v));
-		origin = new Vector3Widget(v -> menu.tileEntity.getItemTransform(i).setOrigin(v));
+		pos = new Vector3Widget(v -> {
+			menu.tileEntity.getItemTransform(i).setPosition(v);
+			menu.tileEntity.getLevel().sendBlockUpdated(menu.tileEntity.getBlockPos(), menu.tileEntity.getBlockState(),
+					menu.tileEntity.getBlockState(), Block.UPDATE_ALL);
+		});
+		rot = new Vector3Widget(v -> {
+			menu.tileEntity.getItemTransform(i).setRotation(v);
+			menu.tileEntity.getLevel().sendBlockUpdated(menu.tileEntity.getBlockPos(), menu.tileEntity.getBlockState(),
+					menu.tileEntity.getBlockState(), Block.UPDATE_ALL);
+		});
+		scale = new Vector3Widget(new Vector3f(1, 1, 1), v -> {
+			menu.tileEntity.getItemTransform(i).setScale(v);
+			menu.tileEntity.getLevel().sendBlockUpdated(menu.tileEntity.getBlockPos(), menu.tileEntity.getBlockState(),
+					menu.tileEntity.getBlockState(), Block.UPDATE_ALL);
+		});
+		origin = new Vector3Widget(v -> {
+			menu.tileEntity.getItemTransform(i).setOrigin(v);
+			menu.tileEntity.getLevel().sendBlockUpdated(menu.tileEntity.getBlockPos(), menu.tileEntity.getBlockState(),
+					menu.tileEntity.getBlockState(), Block.UPDATE_ALL);
+		});
 	}
 
 	@Override
@@ -77,6 +96,26 @@ public class AdvancedDisplayScreen extends AbstractContainerScreen<AdvancedDispl
 
 		guiGraphics.drawString(font, this.menu.slots.get(index.get()).getItem().getDisplayName(), this.leftPos - 90,
 				this.topPos + 3, Color.white.getRGB());
+	}
+
+	public void setPos(BlockPos pos2) {
+//		this.pos = pos;
+		BlockEntity e = this.minecraft.level.getBlockEntity(pos2);
+		if (e != null) {
+			if (e instanceof AdvancedDisplayBlockEntity adbe) {
+				for (int i = 0; i < AdvancedDisplayBlockEntity.NUM_SLOTS; i++) {
+					Transform t = new Transform();
+
+					t.setOrigin(origin.get());
+					t.setPosition(pos.get());
+					t.setRotation(rot.get());
+					t.setScale(scale.get());
+
+					adbe.setItemTransform(i, t);
+				}
+
+			}
+		}
 	}
 
 }

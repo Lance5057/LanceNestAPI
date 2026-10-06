@@ -61,6 +61,10 @@ public class AdvancedDisplayBlockEntity extends BlockEntity {
 		return this.transforms.get(i);
 	}
 
+	public void setItemTransform(int i, Transform t) {
+		this.transforms.set(i, t);
+	}
+
 	@Override
 	public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
 		CompoundTag nbt = super.getUpdateTag(registries);
@@ -92,10 +96,26 @@ public class AdvancedDisplayBlockEntity extends BlockEntity {
 		if (nbt.contains(TAG)) {
 			items.deserializeNBT(registries, nbt.getCompound(TAG));
 		}
+
+		if (nbt.contains("transforms")) {
+			CompoundTag t = nbt.getCompound("transforms");
+			for (int i = 0; i < NUM_SLOTS; i++) {
+				transforms.add(i, Transform.readNBT(t.getCompound("transform_" + i)));
+			}
+		}
 	}
 
 	CompoundTag writeNBT(CompoundTag tag, HolderLookup.Provider registries) {
 		tag.put(TAG, items.serializeNBT(registries));
+
+		CompoundTag t = new CompoundTag();
+		for (int i = 0; i < NUM_SLOTS; i++) {
+			if (transforms.get(i) != null)
+				t.put("transform_" + i, Transform.writeNBT(transforms.get(i)));
+		}
+
+		tag.put("transforms", t);
+
 		return tag;
 	}
 
