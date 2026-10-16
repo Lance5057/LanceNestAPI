@@ -44,11 +44,7 @@ public class AdvancedDisplayBlockEntity extends BlockEntity {
 
 			@Override
 			protected void onContentsChanged(int slot) {
-				AdvancedDisplayBlockEntity.this.requestModelDataUpdate();
-				AdvancedDisplayBlockEntity.this.getLevel().sendBlockUpdated(
-						AdvancedDisplayBlockEntity.this.getBlockPos(), AdvancedDisplayBlockEntity.this.getBlockState(),
-						AdvancedDisplayBlockEntity.this.getBlockState(), Block.UPDATE_CLIENTS);
-				AdvancedDisplayBlockEntity.this.setChanged();
+				AdvancedDisplayBlockEntity.update(AdvancedDisplayBlockEntity.this);
 			}
 		};
 	}
@@ -81,11 +77,13 @@ public class AdvancedDisplayBlockEntity extends BlockEntity {
 
 	@Override
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		this.requestModelDataUpdate();
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
 	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider registries) {
+		setChanged();
 		CompoundTag tag = pkt.getTag();
 
 		if (tag != null)
@@ -133,5 +131,12 @@ public class AdvancedDisplayBlockEntity extends BlockEntity {
 
 	public String getDisplayName() {
 		return "screen.advanceddisplay.name";
+	}
+
+	public static void update(AdvancedDisplayBlockEntity e) {
+		e.requestModelDataUpdate();
+		e.getLevel().sendBlockUpdated(e.getBlockPos(), e.getBlockState(),
+				e.getBlockState(), Block.UPDATE_ALL);
+		e.setChanged();
 	}
 }
