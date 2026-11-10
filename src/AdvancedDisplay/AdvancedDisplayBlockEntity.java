@@ -26,11 +26,15 @@ public class AdvancedDisplayBlockEntity extends BlockEntity {
 	public final static int NUM_SLOTS = 8;
 	private List<Transform> transforms = new ArrayList<Transform>();
 
+	public List<Transform> getTransforms() {
+		return transforms;
+	}
+
 	public AdvancedDisplayBlockEntity(BlockPos pos, BlockState blockState) {
 		super(LanceNestAPI.ADVANCED_DISPLAY_ENTITY.get(), pos, blockState);
 
 		for (int i = 0; i < NUM_SLOTS; i++) {
-			transforms.add(new Transform());
+			transforms.add(new Transform(0, 0, 0, 0, 0, 0, 1, 1, 1, 0.5f, 0.5f, 0.5f));
 		}
 	}
 
@@ -97,8 +101,9 @@ public class AdvancedDisplayBlockEntity extends BlockEntity {
 
 		if (nbt.contains("transforms")) {
 			CompoundTag t = nbt.getCompound("transforms");
+//			transforms.clear();
 			for (int i = 0; i < NUM_SLOTS; i++) {
-				transforms.add(i, Transform.readNBT(t.getCompound("transform_" + i)));
+				transforms.set(i, Transform.readNBT(t.getCompound("transform_" + i)));
 			}
 		}
 	}
@@ -135,8 +140,7 @@ public class AdvancedDisplayBlockEntity extends BlockEntity {
 
 	public static void update(AdvancedDisplayBlockEntity e) {
 		e.requestModelDataUpdate();
-		e.getLevel().sendBlockUpdated(e.getBlockPos(), e.getBlockState(),
-				e.getBlockState(), Block.UPDATE_ALL);
+		e.getLevel().sendBlockUpdated(e.getBlockPos(), e.getBlockState(), e.getBlockState(), Block.UPDATE_ALL);
 		e.setChanged();
 	}
 }
