@@ -7,7 +7,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public abstract class MultiToolRecipeShapeless extends MultiToolRecipe {
+public abstract class MultiToolRecipeShapeless<T extends MultiToolRecipeWrapper> extends MultiToolRecipe<T> {
 
 	public MultiToolRecipeShapeless(NonNullList<AnimatedRecipeItemUse> tools) {
 		super(tools);

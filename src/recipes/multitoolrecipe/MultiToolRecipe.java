@@ -5,7 +5,7 @@ import api.LanceNestAPI.src.util.recipes.MultiToolRecipeWrapper;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.crafting.Recipe;
 
-public abstract class MultiToolRecipe implements Recipe<MultiToolRecipeWrapper> {
+public abstract class MultiToolRecipe<T extends MultiToolRecipeWrapper> implements Recipe<T> {
 
 	NonNullList<AnimatedRecipeItemUse> tools;
 

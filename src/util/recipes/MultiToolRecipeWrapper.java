@@ -18,7 +18,7 @@ public class MultiToolRecipeWrapper extends RecipeWrapper {
 	private final StackedContents stackedContents = new StackedContents();
 	private final int ingredientCount;
 
-	private MultiToolRecipeWrapper(int width, int height, IItemHandler item) {
+	protected MultiToolRecipeWrapper(int width, int height, IItemHandler item) {
 		super(item);
 		this.width = width;
 		this.height = height;

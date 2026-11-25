@@ -4,4 +4,5 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public interface StationIngredientIn {
 	public void setIngredientIn(Ingredient ing);
+	public Ingredient getIngredientIn();
 }

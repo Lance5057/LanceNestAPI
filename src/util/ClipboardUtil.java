@@ -2,8 +2,6 @@ package api.LanceNestAPI.src.util;
 
 import org.joml.Vector3f;
 
-import com.lance5057.extradelight.ExtraDelight;
-
 import api.LanceNestAPI.src.util.rendering.animation.Transform;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -27,7 +25,7 @@ public class ClipboardUtil {
 
 		String[] f = s.split(",");
 		if (f.length < 3) {
-			ExtraDelight.logger.error("Failed to paste Vector3f");
+//			LanceNestAPI.logger.error("Failed to paste Vector3f");
 			Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.VILLAGER_NO, 1, 1));
 			return new Vector3f(0, 0, 0);
 		}
@@ -40,7 +38,7 @@ public class ClipboardUtil {
 			v.z = Float.parseFloat(f[2]);
 		} catch (NumberFormatException e) {
 			Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.VILLAGER_NO, 1, 1));
-			ExtraDelight.logger.error("Failed to paste Vector3f");
+//			ExtraDelight.logger.error("Failed to paste Vector3f");
 			return new Vector3f(0, 0, 0);
 		}
 
@@ -63,7 +61,7 @@ public class ClipboardUtil {
 		String[] f = s.split(" ");
 
 		if (f.length < 4) {
-			ExtraDelight.logger.error("Failed to paste Transform");
+//			ExtraDelight.logger.error("Failed to paste Transform");
 			Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.VILLAGER_NO, 1, 1));
 			return new Transform();
 		} else {

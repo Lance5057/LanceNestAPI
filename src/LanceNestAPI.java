@@ -2,9 +2,6 @@ package api.LanceNestAPI.src;
 
 import java.util.function.Supplier;
 
-import com.lance5057.extradelight.ExtraDelight;
-import com.lance5057.extradelight.workstations.oven.OvenMenu;
-
 import api.LanceNestAPI.src.AdvancedDisplay.AdvancedDisplayBlock;
 import api.LanceNestAPI.src.AdvancedDisplay.AdvancedDisplayBlockEntity;
 import api.LanceNestAPI.src.AdvancedDisplay.AdvancedDisplayMenu;

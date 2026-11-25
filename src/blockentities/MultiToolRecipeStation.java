@@ -8,6 +8,7 @@ import api.LanceNestAPI.src.blocks.RecipeToolSupplier.components.item.BlockEntit
 import api.LanceNestAPI.src.recipes.AnimatedRecipeItemUse;
 import api.LanceNestAPI.src.recipes.multitoolrecipe.MultiToolRecipe;
 import api.LanceNestAPI.src.util.ItemUtil;
+import api.LanceNestAPI.src.util.recipes.MultiToolRecipeWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -36,7 +37,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 
-public abstract class MultiToolRecipeStation<V extends MultiToolRecipe> extends WorkstationBasicBlockEntity {
+public abstract class MultiToolRecipeStation<T extends MultiToolRecipeWrapper, V extends MultiToolRecipe<T>> extends WorkstationBasicBlockEntity {
 	public static final String INVENTORY_TAG = "inv";
 
 	public boolean recipeLocked = false;
